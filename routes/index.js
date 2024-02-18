@@ -1,12 +1,12 @@
 import Fastify from "fastify";
 
-const fastify = Fastify({
+const app = Fastify({
   logger: true,
 });
 
 const puppeteer = require("puppeteer");
 
-fastify.post("/html-to-pdf", async (request, reply) => {
+app.post("/html-to-pdf", async (request, reply) => {
   const browser = await puppeteer.launch({
     headless: true,
   });
@@ -29,7 +29,6 @@ fastify.post("/html-to-pdf", async (request, reply) => {
 });
 
 export default async function handler(req, res) {
-  await fastify.ready();
-  fastify.server.emit("request", req, res);
+  await app.ready();
+  app.server.emit("request", req, res);
 }
-module.exports = HTMLtoPDF;
