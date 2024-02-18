@@ -1,3 +1,9 @@
+import Fastify from "fastify";
+
+const fastify = Fastify({
+  logger: true,
+});
+
 const puppeteer = require("puppeteer");
 
 fastify.post("/html-to-pdf", async (request, reply) => {
