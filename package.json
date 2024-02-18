@@ -4,6 +4,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "fastify": "^4.25.2"
+    "fastify": "^4.25.2",
+    "fastify-swagger": "^5.2.0",
+    "nodemon": "^3.0.3",
+    "puppeteer": "^22.1.0"
   }
 }
