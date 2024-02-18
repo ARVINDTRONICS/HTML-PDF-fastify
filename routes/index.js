@@ -28,4 +28,8 @@ fastify.post("/html-to-pdf", async (request, reply) => {
   reply.code(200).send({ pdf: pdf.toString("base64") });
 });
 
+export default async function handler(req, res) {
+  await fastify.ready();
+  fastify.server.emit("request", req, res);
+}
 module.exports = HTMLtoPDF;
