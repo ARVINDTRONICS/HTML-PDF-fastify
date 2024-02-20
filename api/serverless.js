@@ -1,5 +1,7 @@
 const Fastify = require("fastify");
 
+const chromium = require("chrome-aws-lambda");
+const playwright = require("playwright-core");
 const app = Fastify({
   logger: true,
 });
@@ -7,8 +9,13 @@ const app = Fastify({
 const puppeteer = require("puppeteer");
 
 app.post("/html-to-pdf", async (request, reply) => {
-  const browser = await puppeteer.launch({
-    headless: true,
+  const browser = await playwright.chromium.launch({
+    args: chromium.args,
+    executablePath:
+      process.env.NODE_ENV !== "development"
+        ? await chromium.executablePath
+        : "/usr/bin/chromium",
+    headless: process.env.NODE_ENV !== "development" ? chromium.headless : true,
   });
 
   // Create a new page
