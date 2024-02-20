@@ -1,19 +1,18 @@
 const Fastify = require("fastify");
 
 const chromium = require("chrome-aws-lambda");
-const playwright = require("playwright-core");
+const puppeteer = require("puppeteer-core");
 const app = Fastify({
   logger: true,
 });
 
 app.post("/html-to-pdf", async (request, reply) => {
-  const browser = await playwright.chromium.launch({
-    args: chromium.args,
-    executablePath:
-      process.env.NODE_ENV !== "development"
-        ? await chromium.executablePath
-        : "/usr/bin/chromium",
-    headless: process.env.NODE_ENV !== "development" ? chromium.headless : true,
+  const browser = await chromium.puppeteer.launch({
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: true,
+    ignoreHTTPSErrors: true,
   });
 
   // Create a new page

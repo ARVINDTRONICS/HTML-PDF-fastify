@@ -11,7 +11,7 @@
     "chrome-aws-lambda": "^10.1.0",
     "fastify": "^4.25.2",
     "nodemon": "^3.0.3",
-    "playwright-core": "^1.41.2",
+    "puppeteer-core": "^22.1.0",
     "vercel": "^33.5.1"
   },
   "devDependencies": {
