@@ -29,7 +29,7 @@ app.post("/html-to-pdf", async (request, reply) => {
     printBackground: true,
     format: "A4",
   });
-
+  //
   await browser.close();
 
   reply.code(200).send({ pdf: pdf.toString("base64") });
