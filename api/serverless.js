@@ -28,7 +28,7 @@ app.post("/html-to-pdf", async (request, reply) => {
   reply.code(200).send({ pdf: pdf.toString("base64") });
 });
 
-export default async function handler(req, res) {
+export default async (req, res) => {
   await app.ready();
   app.server.emit("request", req, res);
-}
+};
