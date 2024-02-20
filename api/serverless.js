@@ -6,8 +6,6 @@ const app = Fastify({
   logger: true,
 });
 
-const puppeteer = require("puppeteer");
-
 app.post("/html-to-pdf", async (request, reply) => {
   const browser = await playwright.chromium.launch({
     args: chromium.args,
