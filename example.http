@@ -1,0 +1,19 @@
+POST /html-to-pdf HTTP/1.1
+Host: html-pdf-fastify.vercel.app
+Content-Type: application/json
+Content-Length: 1014
+
+{
+    "htmlContent": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Sample HTML Page</title>\n</head>\n<body>\n    <header>\n        <h1>Welcome to My Website</h1>\n        <nav>\n            <ul>\n                <li><a href=\"#\">Home</a></li>\n                <li><a href=\"#\">About</a></li>\n                <li><a href=\"#\">Contact</a></li>\n            </ul>\n        </nav>\n    </header>\n    <main>\n        <section>\n            <h2>About Us</h2>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam varius tellus sit amet metus malesuada commodo.</p>\n        </section>\n        <section>\n            <h2>Contact Us</h2>\n            <p>Email: contact@example.com</p>\n            <p>Phone: 123-456-7890</p>\n        </section>\n    </main>\n    <footer>\n        <p>&copy; 2024 My Website. All rights reserved.</p>\n    </footer>\n</body>\n</html>"
+}
+
+#######
+
+POST /html-to-pdf HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Content-Length: 1014
+
+{
+    "htmlContent": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Sample HTPage</title>\n</head>\n<body>\n    <header>\n        <h1>Welcome to My Website</h1>\n        <nav>\n            <ul>\n                <li><a href=\"#\">Home</a></li>\n                <li><a href=\"#\">About</a></li>\n                <li><a href=\"#\">Contact</a></li>\n            </ul>\n        </nav>\n    </header>\n    <main>\n        <section>\n            <h2>About Us</h2>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam varius tellus sit amet metus malesuada commodo.</p>\n        </section>\n        <section>\n            <h2>Contact Us</h2>\n            <p>Email: contact@example.com</p>\n            <p>Phone: 123-456-7890</p>\n        </section>\n    </main>\n    <footer>\n        <p>&copy; 2024 My Website. All rights reserved.</p>\n    </footer>\n</body>\n</html>"
+}

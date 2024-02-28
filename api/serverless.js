@@ -1,35 +1,53 @@
 const Fastify = require("fastify");
 
-const chromium = require("chrome-aws-lambda");
-const puppeteer = require("puppeteer-core");
+let chrome = {};
+let puppeteer;
+
+if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+  chrome = require("chrome-aws-lambda");
+  puppeteer = require("puppeteer-core");
+} else {
+  puppeteer = require("puppeteer");
+}
+
 const app = Fastify({
   logger: true,
 });
 
 app.post("/html-to-pdf", async (request, reply) => {
-  const browser = await chromium.puppeteer.launch({
-    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: true,
-    ignoreHTTPSErrors: true,
-  });
+  let options = {};
 
-  // Create a new page
-  const page = await browser.newPage();
-  const html = request.body.htmlContent;
-  await page.setContent(html, { waitUntil: "domcontentloaded" });
+  if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+    options = {
+      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chrome.defaultViewport,
+      executablePath: await chrome.executablePath,
+      headless: true,
+      ignoreHTTPSErrors: true,
+    };
+  }
 
-  await page.emulateMediaType("screen");
-  const pdf = await page.pdf({
-    margin: { top: "100px", right: "52px", bottom: "100px", left: "50px" },
-    printBackground: true,
-    format: "A4",
-  });
-  //
-  await browser.close();
+  try {
+    const browser = await puppeteer.launch(options);
+    // Create a new page
+    const page = await browser.newPage();
+    const html = request.body.htmlContent;
+    await page.setContent(html, { waitUntil: "domcontentloaded" });
 
-  reply.code(200).send({ pdf: pdf.toString("base64") });
+    await page.emulateMediaType("screen");
+    const pdf = await page.pdf({
+      margin: { top: "100px", right: "52px", bottom: "100px", left: "50px" },
+      printBackground: true,
+      format: "A4",
+    });
+    //
+    await browser.close();
+
+    reply.code(200).send({ pdf: pdf.toString("base64") });
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 });
 
 export default async (req, res) => {
