@@ -4,7 +4,7 @@ let chrome = {};
 let puppeteer;
 
 if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-  chrome = require("chrome-aws-lambda");
+  chrome = require("@sparticuz/chromium");
   puppeteer = require("puppeteer-core");
 } else {
   puppeteer = require("puppeteer");
@@ -22,8 +22,14 @@ app.post("/html-to-pdf", async (request, reply) => {
       args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chrome.defaultViewport,
       executablePath: await chrome.executablePath,
-      headless: true,
+      headless: "new",
       ignoreHTTPSErrors: true,
+    };
+  } else {
+    options = {
+      headless: "new",
+      executablePath:
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     };
   }
 
