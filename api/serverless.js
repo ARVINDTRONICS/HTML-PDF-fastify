@@ -48,7 +48,6 @@ app.post("/html-to-pdf", async (request, reply) => {
     });
     //
     await browser.close();
-
     reply.code(200).send({ pdf: pdf.toString("base64") });
   } catch (err) {
     console.log(err);

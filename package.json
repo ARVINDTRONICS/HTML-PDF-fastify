@@ -1,6 +1,7 @@
 {
   "name": "htmlpdffastify",
   "repository": "https://github.com/vercel/examples.git",
+  "author": "arvind thoppe",
   "license": "MIT",
   "private": true,
   "main": "index.js",
@@ -12,13 +13,13 @@
   },
   "dependencies": {
     "@sparticuz/chromium": "^119.0.2",
-    "puppeteer-core": "^21.5.1",
     "fastify": "^4.25.2",
-    "vercel": "^33.5.1"
+    "puppeteer-core": "^21.5.1"
   },
   "devDependencies": {
+    "puppeteer": "^22.3.0",
     "@vercel/node": "^2.15.8",
-    "puppeteer": "^16.2.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "vercel": "^33.5.3"
   }
 }
